@@ -1,13 +1,13 @@
 <launch>
     <arg name="robot_type" default="$(env ROBOT_TYPE)" doc="Robot type [standard, hero, engineer, rabbit, test]"/>
-    <arg name="action" default="false"/>
-    <arg name="odom_tf" default="false"/>
+    <arg name="action" default="true"/>
+    <arg name="odom_tf" default="true"/>
 
     <rosparam file="$(find rc_config)/config/rc_controllers/$(arg robot_type).yaml" command="load"/>
     <rosparam file="$(find rc_gazebo)/config/actions.yaml" command="load"/>
 
     <node name="controller_loader" pkg="controller_manager" type="controller_manager" output="screen"
-          args="load
+          args="spawn
           controllers/joint_state_controller
           controllers/action_controller
           controllers/chassis_controller
